@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import TypewriterTitle from "@/components/ui/TypewriterTitle";
 import Image from "next/image";
 import Link from "next/link";
+import {ArrowRight} from "lucide-react"
 
 export default function Home() {
   return (
@@ -20,7 +21,9 @@ export default function Home() {
 
         <div className="flex justify-center">
           <Link href={"/dashboard"}>
-            <Button className="bg-green-600">Get Started</Button>
+            <Button className="bg-green-600">Get Started
+              <ArrowRight className="ml-2 w-5 h-5" strokeWidth={3} />
+            </Button>
           </Link>
         </div>
       </div>
