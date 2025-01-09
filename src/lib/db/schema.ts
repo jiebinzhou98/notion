@@ -7,4 +7,13 @@ export const $notes = pgTable('notes', {
     imageUrl: text('image_url'),
     userId: text('user_id').notNull(),
     editorState: text('editor_state'),
-})
+});
+
+
+export type NoteType =  typeof $notes.$inferInsert;
+
+
+//drizzle-orm  => use to fetch data from database
+//drizzle-kit  => use to push the database and view the data 
+
+
