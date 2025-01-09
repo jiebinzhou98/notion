@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import { UserButton } from "@clerk/nextjs";
 import { ArrowLeft } from "lucide-react";
 import  Link  from "next/link";
@@ -24,6 +25,9 @@ const DashboardPage = (props: Props) => {
                 <UserButton/>
             </div>
         </div>
+        <div className="h-8"></div>
+        <Separator/>
+        <div className="h-8"></div>
       </div>
     </div>
   );
