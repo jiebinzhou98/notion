@@ -1,19 +1,15 @@
-import {pgTable, serial, text, timestamp} from 'drizzle-orm/pg-core'
+import { pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 
-export const $notes = pgTable('notes', {
-    id: serial('id').primaryKey(),
-    name: text ('name').notNull(),
-    createdAt: timestamp('created_at').notNull().defaultNow(),
-    imageUrl: text('image_url'),
-    userId: text('user_id').notNull(),
-    editorState: text('editor_state'),
+export const $notes = pgTable("notes", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  imageUrl: text("imageUrl"),
+  userId: text("user_id").notNull(),
+  editorState: text("editor_state"),
 });
 
+export type NoteType = typeof $notes.$inferInsert;
 
-export type NoteType =  typeof $notes.$inferInsert;
-
-
-//drizzle-orm  => use to fetch data from database
-//drizzle-kit  => use to push the database and view the data 
-
-
+// drizzle-orm
+// drizzle-kit
