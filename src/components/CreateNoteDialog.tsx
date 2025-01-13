@@ -5,12 +5,39 @@ import React from 'react'
 import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
+import { useMutation } from '@tanstack/react-query'
+import axios from 'axios'
 
 type Props = {}
 
 const CreateNoteDialog = (props: Props) => {
 
   const [input, setInput] = React.useState('')
+
+  const createNotebook = useMutation({
+    mutationFn: async () => {
+      const response = await axios.post('/api/createNotebook', {
+        name: input
+      })
+      return response.data
+    }
+  })
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if(input === '') {
+      window.alert('Please enter a name for your notebook')
+      return
+    }
+    createNotebook.mutate(undefined,{
+      onSuccess: () => {
+        console.log('Notebook created')
+      },
+      onError: (error) => {
+        console.error(error);
+      },
+    });
+  };
 
   return (
     <Dialog>
@@ -27,7 +54,7 @@ const CreateNoteDialog = (props: Props) => {
                 You can create a new note by clicking the button below.
                 </DialogDescription>
             </DialogHeader>
-            <form>
+            <form onSubmit={handleSubmit}>
               <Input value={input} onChange={e => setInput(e.target.value)} placeholder='Name...'/>
               <div className='h-4'></div>
               <div className='flex items-center gap-2'>
