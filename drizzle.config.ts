@@ -6,9 +6,10 @@ dotenv.config({
 });
 
 export default {
-  driver: "pg", // PostgreSQL driver
-  dialect: "postgresql", // PostgreSQL dialect
   schema: "./src/lib/db/schema.ts", // Path to schema
+  out: "./drizzle", // Path for generated files
+  driver: "postgresql", // Corrected driver name for PostgreSQL
+  dialect: "postgresql", // Added dialect for clarity
   dbCredentials: {
     connectionString: process.env.DATABASE_URL!, // Database connection URL from .env file
   },
