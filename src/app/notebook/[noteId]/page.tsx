@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { db } from '@/lib/db';
+import { clerk } from '@/lib/db/clerk-server';
 import { $notes } from '@/lib/db/schema';
 import { auth } from '@clerk/nextjs/server';
 import { eq, and } from 'drizzle-orm';
@@ -21,6 +22,8 @@ const NoteBookPage = async ({ params: { noteId } }: Props) => {
         return redirect("/dashboard");
     }
 
+    const user = await clerk.users.getUser(userId);
+
     const notes = await db.select().from($notes).where(
         and(
             eq($notes.id, parseInt(noteId)),
@@ -41,7 +44,13 @@ const NoteBookPage = async ({ params: { noteId } }: Props) => {
                             Back
                         </Button>
                     </Link>
-                </div>
+                        <div className='w-3'></div>
+                        <span className='font-semibold'>
+                            {user.firstName} {user.lastName}
+                        </span>
+                        <span className='inline-block mx-1'>/</span>
+                        <span className='text-stone-500 font-semibold'>{note.name}</span>
+                </div>  
             </div>
         </div>
     )
